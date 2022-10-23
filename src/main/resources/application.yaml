@@ -1,0 +1,26 @@
+spring:
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+
+## DO properties
+do:
+  space:
+    key: 5BRJ6U2TIA7HO4YT6MMH
+    secret: dQ/jTxPUkZvz2DE1ZmygSh2cSfRzqd6Wc0Ujgss6cuA
+    endpoint: fra1.digitaloceanspaces.com
+    region: fra1
+    bucket: agaialife
+
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+  health:
+    livenessState:
+      enabled: true
+
+    readinessState:
+      enabled: true

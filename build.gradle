@@ -1,0 +1,47 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'com.palantir.docker' version '0.33.0'
+}
+
+group = 'lubomirhadziev'
+version = '1.4.3'
+sourceCompatibility = "16"
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.7.4'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.7.4'
+    implementation 'org.springframework:spring-web:5.3.23'
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.326'
+    implementation 'net.coobird:thumbnailator:0.4.17'
+
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.4'
+}
+
+String imageName = "lubomirhadziev/agaia-files:$version"
+docker {
+    dependsOn build
+    name imageName
+    files bootJar.archivePath
+    buildArgs(['JAR_FILE': "${bootJar.archiveName}"])
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+targetCompatibility = JavaVersion.VERSION_16
