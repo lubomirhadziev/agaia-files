@@ -15,4 +15,4 @@ preferences: {}
 users:
   - name: do-fra1-k8s-1-22-8-do-1-fra1-1651436019717-admin
     user:
-      token: dop_v1_6f7297d7f341a7c69a18c8d808bd7172e753736a36249da345d61b6137d597bd
+      token: dop_v1_157ce3920c8efb54cbf3cc6af2cd340a762c6bcbdd8c91a74aebe1ff3b2c1aaa
