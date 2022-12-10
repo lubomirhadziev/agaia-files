@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: lubomirhadziev/agaia-files:1.5.0
+          image: lubomirhadziev/agaia-files:1.5.1
           ports:
             - containerPort: 8080
           imagePullPolicy: Always
@@ -40,7 +40,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: agaia-recipes
+  name: agaia-files
   annotations:
     service.beta.kubernetes.io/do-loadbalancer-name: "images.agaia.life"
     service.beta.kubernetes.io/do-loadbalancer-protocol: "https"
@@ -49,7 +49,7 @@ metadata:
     service.beta.kubernetes.io/do-loadbalancer-hostname: "images.agaia.life"
 spec:
   selector:
-    app: agaia-recipes
+    app: agaia-files
   ports:
     - name: https
       protocol: TCP
