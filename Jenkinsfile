@@ -40,6 +40,7 @@ pipeline {
                 echo 'Deploying ....'
                 slackSend(color: "#f2bc29", message: "[agaia-files]: Deploying ... `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n${env.BUILD_URL}")
 
+                sh 'doctl kubernetes cluster kubeconfig show 08a3d678-c6ee-42e2-b222-a2b8b2876d0d > deploy/kube-config.yaml'
                 sh 'kubectl --kubeconfig=deploy/kube-config.yaml -n agaia apply -f deploy/app.yaml'
             }
         }

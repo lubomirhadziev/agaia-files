@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: lubomirhadziev/agaia-files:1.5.2
+          image: lubomirhadziev/agaia-files:1.6.0
           ports:
             - containerPort: 8080
           imagePullPolicy: Always
@@ -42,11 +42,11 @@ kind: Service
 metadata:
   name: agaia-files
   annotations:
-    service.beta.kubernetes.io/do-loadbalancer-name: "images.agaia.life"
+    service.beta.kubernetes.io/do-loadbalancer-name: "files.agaia.life"
     service.beta.kubernetes.io/do-loadbalancer-protocol: "https"
-    service.beta.kubernetes.io/do-loadbalancer-certificate-id: "48b9ea55-a2b5-4cae-9626-7932bd01508e"
+    service.beta.kubernetes.io/do-loadbalancer-certificate-id: "042d191e-392f-4b56-9daf-7514326c9f7c"
     service.beta.kubernetes.io/do-loadbalancer-disable-lets-encrypt-dns-records: "false"
-    service.beta.kubernetes.io/do-loadbalancer-hostname: "images.agaia.life"
+    service.beta.kubernetes.io/do-loadbalancer-hostname: "files.agaia.life"
 spec:
   selector:
     app: agaia-files
@@ -54,10 +54,5 @@ spec:
     - name: https
       protocol: TCP
       port: 443
-      targetPort: 8080
-
-    - name: http
-      protocol: TCP
-      port: 80
       targetPort: 8080
   type: LoadBalancer
