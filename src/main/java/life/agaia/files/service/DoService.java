@@ -32,7 +32,8 @@ public class DoService {
             return s3Client.getObject(doSpaceBucket, fileName).getObjectContent();
         } catch (Exception exception) {
             log.error("Failed to fetch file for {} fallback to false", fileName, exception);
-            return null;
+            throw exception;
+//            return null;
         }
     }
 

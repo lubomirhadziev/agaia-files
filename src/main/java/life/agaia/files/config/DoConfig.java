@@ -31,7 +31,7 @@ public class DoConfig {
 
         return AmazonS3ClientBuilder.standard()
             .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(doSpaceEndpoint, doSpaceRegion))
-            .withClientConfiguration(new ClientConfiguration().withMaxConnections(100).withConnectionTimeout(2))
+            .withClientConfiguration(new ClientConfiguration().withMaxConnections(50).withConnectionTimeout(2))
             .withCredentials(new AWSStaticCredentialsProvider(basicAWSCredentials))
             .build();
     }

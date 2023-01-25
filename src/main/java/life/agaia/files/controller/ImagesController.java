@@ -4,6 +4,7 @@ import life.agaia.files.service.DoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ public class ImagesController {
     private final DoService doService;
 
     @GetMapping("{size}/{type}/{fileName}")
+    @Cacheable(value = "image_thumb")
     public ResponseEntity<InputStreamResource> getImageThumb(
         @PathVariable String size,
         @PathVariable String type,

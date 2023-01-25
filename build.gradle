@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'lubomirhadziev'
-version = '1.7.0'
+version = '1.8.0'
 sourceCompatibility = "16"
 
 configurations {
@@ -25,6 +25,8 @@ dependencies {
     implementation 'org.springframework:spring-web:5.3.23'
     implementation 'com.amazonaws:aws-java-sdk-s3:1.12.326'
     implementation 'net.coobird:thumbnailator:0.4.17'
+    implementation 'org.springframework.boot:spring-boot-starter-cache:2.4.3'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis:2.4.3'
 
     compileOnly 'org.projectlombok:lombok:1.18.24'
 

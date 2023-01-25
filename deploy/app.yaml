@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: agaia-files
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: agaia-files
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: lubomirhadziev/agaia-files:1.7.0
+          image: lubomirhadziev/agaia-files:1.8.0
           ports:
             - containerPort: 8080
           imagePullPolicy: Always

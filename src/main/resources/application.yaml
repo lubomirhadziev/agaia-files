@@ -3,6 +3,14 @@ spring:
     serialization:
       fail-on-empty-beans: false
 
+  redis:
+    database: 5
+    port: 25061
+    host: db-redis-fra1-30231-do-user-228545-0.b.db.ondigitalocean.com
+    username: default
+    password: iQm2885V4O8rWSfl
+    ssl: true
+
 ## DO properties
 do:
   space:
