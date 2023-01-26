@@ -1,6 +1,5 @@
 package life.agaia.files.config;
 
-import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder;
@@ -31,7 +30,7 @@ public class DoConfig {
 
         return AmazonS3ClientBuilder.standard()
             .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(doSpaceEndpoint, doSpaceRegion))
-            .withClientConfiguration(new ClientConfiguration().withMaxConnections(50).withConnectionTimeout(2))
+//            .withClientConfiguration(new ClientConfiguration().withMaxConnections(50).withConnectionTimeout(2))
             .withCredentials(new AWSStaticCredentialsProvider(basicAWSCredentials))
             .build();
     }

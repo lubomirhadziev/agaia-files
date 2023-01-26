@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.io.File;
+import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +34,15 @@ public class DoService {
         } catch (Exception exception) {
             log.error("Failed to fetch file for {} fallback to false", fileName, exception);
             throw exception;
-//            return null;
+        }
+    }
+
+    public byte[] getFileContentByte(String fileName) throws IOException {
+        try {
+            return s3Client.getObject(doSpaceBucket, fileName).getObjectContent().readAllBytes();
+        } catch (Exception exception) {
+            log.error("Failed to fetch file for {} fallback to false", fileName, exception);
+            throw exception;
         }
     }
 
