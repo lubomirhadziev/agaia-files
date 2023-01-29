@@ -39,7 +39,12 @@ public class DoService {
 
     public byte[] getFileContentByte(String fileName) throws IOException {
         try {
-            return s3Client.getObject(doSpaceBucket, fileName).getObjectContent().readAllBytes();
+            S3ObjectInputStream object = s3Client.getObject(doSpaceBucket, fileName).getObjectContent();
+            byte[] bytes = object.readAllBytes();
+
+            object.close();
+
+            return bytes;
         } catch (Exception exception) {
             log.error("Failed to fetch file for {} fallback to false", fileName, exception);
             throw exception;
