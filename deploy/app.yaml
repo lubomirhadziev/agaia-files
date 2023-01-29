@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: lubomirhadziev/agaia-files:1.10.0
+          image: lubomirhadziev/agaia-files:1.11.0
           ports:
             - containerPort: 8080
           imagePullPolicy: Always

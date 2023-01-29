@@ -1,5 +1,6 @@
 package life.agaia.files.service;
 
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import life.agaia.files.dto.ImageDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,27 +38,41 @@ public class ImageService {
 
         String originalFilePath = String.format("media/images/%s/%s", type, fileName);
 
+        S3ObjectInputStream imgStream = null;
+
         try {
             String[] sizes = size.split("x");
             int width = Integer.parseInt(sizes[0]);
             int height = Integer.parseInt(sizes[1]);
             String newFileName = generateOutputName(originalFilePath);
 
-            Thumbnails.of(doService.getFileContent(originalFilePath))
+            imgStream = doService.getFileContent(originalFilePath);
+
+            Thumbnails.of(imgStream)
                 .size(width, height)
                 .outputQuality(0.8)
                 .toFile(newFileName);
 
+            imgStream.close();
+
             doService.writeFileContent(thumbnailFilePath, newFileName);
+
+            return thumbnailFilePath;
         } catch (UnsupportedFormatException e) {
             log.error("Unsupported format for original image for {}", originalFilePath);
             return originalFilePath;
         } catch (IOException e) {
             log.error("Failed to create thumbnail for {}", originalFilePath, e);
             return originalFilePath;
+        } finally {
+            if (imgStream != null) {
+                try {
+                    imgStream.close();
+                } catch (IOException e) {
+                    log.error("Unable to close stream on final catch for {}", originalFilePath, e);
+                }
+            }
         }
-
-        return thumbnailFilePath;
     }
 
     private String generateOutputName(String originalFile) {
