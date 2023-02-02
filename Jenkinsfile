@@ -18,6 +18,14 @@ pipeline {
                 sh './gradlew test'
             }
         }
+        stage('Publish') {
+            steps {
+                echo 'Publish in private maven repository ...'
+                slackSend(color: "#f2bc29", message: "[agaia-files]: Publish `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n${env.BUILD_URL}")
+
+                sh './gradlew publish'
+            }
+        }
         stage('Docker') {
             steps {
                 echo 'Docker ...'
