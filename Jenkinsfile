@@ -10,14 +10,6 @@ pipeline {
                 sh './gradlew build'
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing ...'
-                slackSend(color: "#f2bc29", message: "[agaia-files]: Testing `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n${env.BUILD_URL}")
-
-                sh './gradlew test'
-            }
-        }
         stage('Publish') {
             steps {
                 echo 'Publish in private maven repository ...'
@@ -40,7 +32,7 @@ pipeline {
                 slackSend(color: "#f2bc29", message: "[agaia-files]: Push to docker hub `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n${env.BUILD_URL}")
 
                 sh 'echo "kokakola159753" | docker login -u lubomirhadziev --password-stdin'
-                sh "docker push lubomirhadziev/agaia-files:\$(./gradlew properties -q | grep 'version:' | awk '{print \$2}')"
+                sh "docker push lubomirhadziev/agaia-files:\$(cat gradle.properties | grep 'VERSION=' | awk -F= '{print \$2}')"
             }
         }
         stage('Deploy') {
