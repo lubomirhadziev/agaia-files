@@ -1,4 +1,4 @@
-FROM --platform=linux/x86_64 openjdk:17-alpine
+FROM bellsoft/liberica-runtime-container:jdk-17-stream-musl
 ARG JAR_FILE
 COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+CMD java -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:MinMetaspaceFreeRatio=10 -XX:MaxMetaspaceFreeRatio=20 -jar /app.jar
