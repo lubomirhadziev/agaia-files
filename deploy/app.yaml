@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
         - name: app
-          image: lubomirhadziev/agaia-files:1.16.0
+          image: lubomirhadziev/agaia-files:1.16.1
           resources:
             requests:
-              memory: "150Mi"
+              memory: "200Mi"
             limits:
-              memory: "350Mi"
+              memory: "450Mi"
           ports:
             - containerPort: 8080
           imagePullPolicy: Always
@@ -59,7 +59,7 @@ spec:
         name: memory
         target:
           type: Utilization
-          averageUtilization: 280
+          averageUtilization: 150
 ---
 apiVersion: v1
 kind: Service
